@@ -2,7 +2,7 @@
 CREATE DATABASE NamothHospital;
 USE NamothHospital;
 
--- Table: Patients
+-- Patients
 CREATE TABLE Patients (
     patient_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE Patients (
     email VARCHAR(100) UNIQUE
 );
 
--- Table: Doctors
+-- Doctors
 CREATE TABLE Doctors (
     doctor_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
@@ -23,13 +23,13 @@ CREATE TABLE Doctors (
     hire_date DATE NOT NULL
 );
 
--- Table: Specializations
+-- Specializations
 CREATE TABLE Specializations (
     specialization_id INT AUTO_INCREMENT PRIMARY KEY,
     specialization_name VARCHAR(100) NOT NULL UNIQUE
 );
 
--- Table: Doctor_Specializations (Many-to-Many)
+-- Doctor_Specializations (Many-to-Many)
 CREATE TABLE Doctor_Specializations (
     doctor_id INT,
     specialization_id INT,
@@ -38,14 +38,14 @@ CREATE TABLE Doctor_Specializations (
     FOREIGN KEY (specialization_id) REFERENCES Specializations(specialization_id) ON DELETE CASCADE
 );
 
--- Table: Rooms
+-- Rooms
 CREATE TABLE Rooms (
     room_id INT AUTO_INCREMENT PRIMARY KEY,
     room_number VARCHAR(10) NOT NULL UNIQUE,
     room_type ENUM('Consultation', 'Surgery', 'Examination') NOT NULL
 );
 
--- Table: Appointments
+-- Appointments
 CREATE TABLE Appointments (
     appointment_id INT AUTO_INCREMENT PRIMARY KEY,
     patient_id INT NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE Appointments (
     FOREIGN KEY (room_id) REFERENCES Rooms(room_id)
 );
 
--- Table: Payments (One-to-One with Appointments)
+-- Payments (One-to-One with Appointments)
 CREATE TABLE Payments (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     appointment_id INT UNIQUE,
